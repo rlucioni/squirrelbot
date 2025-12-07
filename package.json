@@ -8,7 +8,7 @@
     "lint": "eslint .",
     "prettier": "prettier . --write",
     "serve": "functions-framework --target=squirrelbot",
-    "deploy": "gcloud functions deploy squirrelbot --gen2 --runtime=nodejs24 --region=us-central1 --source=. --entry-point=squirrelbot --trigger-http --allow-unauthenticated --env-vars-file=.env",
+    "deploy": "gcloud functions deploy squirrelbot --gen2 --runtime=nodejs24 --region=us-central1 --source=. --entry-point=squirrelbot --trigger-http --allow-unauthenticated --env-vars-file=.env.yaml",
     "schedule": "gcloud scheduler jobs create http squirrelbot-cron --schedule=\"0 * * * *\" --uri=\"$(gcloud functions describe squirrelbot --region=us-central1 --format='value(serviceConfig.uri)')\" --http-method=GET --location=us-central1",
     "reschedule": "gcloud scheduler jobs update http squirrelbot-cron --location=us-central1 --schedule=\"0 * * * *\""
   },
