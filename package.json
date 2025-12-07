@@ -1,0 +1,28 @@
+{
+  "name": "squirrelbot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "lint": "eslint .",
+    "prettier": "prettier . --write",
+    "serve": "functions-framework --target=squirrelbot",
+    "deploy": "gcloud functions deploy squirrelbot --gen2 --runtime=nodejs24 --region=us-central1 --source=. --entry-point=squirrelbot --trigger-http --allow-unauthenticated --env-vars-file=.env",
+    "schedule": "gcloud scheduler jobs create http squirrelbot-cron --schedule=\"0 * * * *\" --uri=\"$(gcloud functions describe squirrelbot --region=us-central1 --format='value(serviceConfig.uri)')\" --http-method=GET --location=us-central1",
+    "reschedule": "gcloud scheduler jobs update http squirrelbot-cron --location=us-central1 --schedule=\"0 * * * *\""
+  },
+  "dependencies": {
+    "@google-cloud/functions-framework": "4.0.1",
+    "@slack/web-api": "7.13.0",
+    "dotenv": "17.2.3"
+  },
+  "devDependencies": {
+    "@eslint/compat": "2.0.0",
+    "@eslint/js": "9.39.1",
+    "eslint": "9.39.1",
+    "eslint-config-prettier": "10.1.8",
+    "globals": "16.5.0",
+    "prettier": "3.7.4"
+  }
+}
