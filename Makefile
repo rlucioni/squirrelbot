@@ -34,5 +34,11 @@ reschedule:
 schedule:
 	npm run schedule
 
+pause:
+	npm run pause
+
+resume:
+	npm run resume
+
 serve:
 	npm run serve
